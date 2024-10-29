@@ -40,6 +40,7 @@ package jchess;
 
 //this is the Develop for push
 //git comment demo
+//git comment demo2
 //import java.awt.Image;
 import java.util.ArrayList;
 
