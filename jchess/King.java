@@ -38,10 +38,9 @@ package jchess;
         0 1 2 3 4 5 6 7
  */
 
-//this is the Develop for push
-//git comment demo
-//git comment demo2
-//import java.awt.Image;
+//git flow check feature branch
+
+import java.awt.Image;
 import java.util.ArrayList;
 
 public class King extends Piece
