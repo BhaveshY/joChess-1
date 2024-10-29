@@ -37,9 +37,10 @@ package jchess;
         |_|_|_|_|_|_|_|_|0
         0 1 2 3 4 5 6 7
  */
-//this is the first comment for push
 
-import java.awt.Image;
+//this is the Develop for push
+
+//import java.awt.Image;
 import java.util.ArrayList;
 
 public class King extends Piece
