@@ -37,7 +37,7 @@ package jchess;
         |_|_|_|_|_|_|_|_|0
         0 1 2 3 4 5 6 7
  */
-//this is the third comment for push
+//this is the first comment for push
 
 import java.awt.Image;
 import java.util.ArrayList;
