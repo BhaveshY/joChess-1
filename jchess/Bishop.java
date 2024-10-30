@@ -40,7 +40,7 @@ import java.awt.Image;
 0 1 2 3 4 5 6 7
  */
 
-//I am King of Chess!
+
 public class Bishop extends Piece
 {
 
