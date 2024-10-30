@@ -37,8 +37,12 @@ package jchess;
         |_|_|_|_|_|_|_|_|0
         0 1 2 3 4 5 6 7
  */
+<<<<<<< Updated upstream
 
 //git flow check feature branch
+=======
+//this is the fourth comment for push
+>>>>>>> Stashed changes
 
 import java.awt.Image;
 import java.util.ArrayList;
