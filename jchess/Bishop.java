@@ -18,6 +18,7 @@
  * Mateusz Sławomir Lach ( matlak, msl )
  * Damian Marciniak
  */
+
 package jchess;
 
 import java.util.ArrayList;
@@ -38,6 +39,8 @@ import java.awt.Image;
 |X|_|_|_|_|_|X|_|0
 0 1 2 3 4 5 6 7
  */
+
+//I am King of Chess!
 public class Bishop extends Piece
 {
 
