@@ -42,46 +42,45 @@ import java.util.logging.Logger;
 public class Game extends JPanel implements MouseListener, ComponentListener
 {
 
-    public Settings settings;
-    public boolean blockedChessboard;
-    public Chessboard chessboard;
-    private Player activePlayer;
-    public GameClock gameClock;
-    public Client client;
-    public Moves moves;
-    public Chat chat;
+    public Settings settings; // Holds the game settings
+    public boolean blockedChessboard; // Indicates if the chessboard is blocked for user interaction
+    public Chessboard chessboard; // The chessboard component
+    private Player activePlayer; // The player who is currently active
+    public GameClock gameClock; // The game clock component
+    public Client client; // The client for network play
+    public Moves moves; // The moves history component
+    public Chat chat; // The chat component
 
     Game()
     {
-        this.setLayout(null);
-        this.moves = new Moves(this);
-        settings = new Settings();
-        chessboard = new Chessboard(this.settings, this.moves);
-        chessboard.setVisible(true);
-        chessboard.setSize(Chessboard.img_height, Chessboard.img_width);
-        chessboard.addMouseListener(this);
-        chessboard.setLocation(new Point(0, 0));
-        this.add(chessboard);
-        //this.chessboard.
-        gameClock = new GameClock(this);
-        gameClock.setSize(new Dimension(200, 100));
-        gameClock.setLocation(new Point(500, 0));
-        this.add(gameClock);
+        this.setLayout(null); // Set layout to null for absolute positioning
+        this.moves = new Moves(this); // Initialize moves history
+        settings = new Settings(); // Load game settings
+        chessboard = new Chessboard(this.settings, this.moves); // Create chessboard with settings and moves
+        chessboard.setVisible(true); // Make chessboard visible
+        chessboard.setSize(Chessboard.img_height, Chessboard.img_width); // Set chessboard size
+        chessboard.addMouseListener(this); // Add mouse listener for chessboard interactions
+        chessboard.setLocation(new Point(0, 0)); // Set chessboard location
+        this.add(chessboard); // Add chessboard to the panel
+        gameClock = new GameClock(this); // Initialize game clock
+        gameClock.setSize(new Dimension(200, 100)); // Set game clock size
+        gameClock.setLocation(new Point(500, 0)); // Set game clock location
+        this.add(gameClock); // Add game clock to the panel
 
-        JScrollPane movesHistory = this.moves.getScrollPane();
-        movesHistory.setSize(new Dimension(180, 350));
-        movesHistory.setLocation(new Point(500, 121));
-        this.add(movesHistory);
+        JScrollPane movesHistory = this.moves.getScrollPane(); // Get scroll pane for moves history
+        movesHistory.setSize(new Dimension(180, 350)); // Set size for moves history
+        movesHistory.setLocation(new Point(500, 121)); // Set location for moves history
+        this.add(movesHistory); // Add moves history to the panel
 
-        this.chat = new Chat();
-        this.chat.setSize(new Dimension(380, 100));
-        this.chat.setLocation(new Point(0, 500));
-        this.chat.setMinimumSize(new Dimension(400, 100));
+        this.chat = new Chat(); // Initialize chat component
+        this.chat.setSize(new Dimension(380, 100)); // Set chat size
+        this.chat.setLocation(new Point(0, 500)); // Set chat location
+        this.chat.setMinimumSize(new Dimension(400, 100)); // Set minimum size for chat
 
-        this.blockedChessboard = false;
-        this.setLayout(null);
-        this.addComponentListener(this);
-        this.setDoubleBuffered(true);
+        this.blockedChessboard = false; // Initialize chessboard as not blocked
+        this.setLayout(null); // Set layout to null for absolute positioning
+        this.addComponentListener(this); // Add component listener for resizing
+        this.setDoubleBuffered(true); // Enable double buffering for smoother rendering
     }
 
     /** Method to save actual state of game
@@ -89,37 +88,37 @@ public class Game extends JPanel implements MouseListener, ComponentListener
      */
     public void saveGame(File path)
     {
-        File file = path;
-        FileWriter fileW = null;
+        File file = path; // Set the file to save the game
+        FileWriter fileW = null; // Initialize FileWriter
         try
         {
-            fileW = new FileWriter(file);
+            fileW = new FileWriter(file); // Create FileWriter for the specified file
         }
         catch (java.io.IOException exc)
         {
-            System.err.println("error creating fileWriter: " + exc);
-            JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file")+": " + exc);
-            return;
+            System.err.println("error creating fileWriter: " + exc); // Log error if FileWriter creation fails
+            JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file")+": " + exc); // Show error message
+            return; // Exit method on error
         }
-        Calendar cal = Calendar.getInstance();
-        String str = new String("");
+        Calendar cal = Calendar.getInstance(); // Get current date and time
+        String str = new String(""); // Initialize string to hold game data
         String info = new String("[Event \"Game\"]\n[Date \"" + cal.get(cal.YEAR) + "." + (cal.get(cal.MONTH) + 1) + "." + cal.get(cal.DAY_OF_MONTH) + "\"]\n"
-                + "[White \"" + this.settings.playerWhite.name + "\"]\n[Black \"" + this.settings.playerBlack.name + "\"]\n\n");
-        str += info;
-        str += this.moves.getMovesInString();
+                + "[White \"" + this.settings.playerWhite.name + "\"]\n[Black \"" + this.settings.playerBlack.name + "\"]\n\n"); // Prepare game info
+        str += info; // Append game info to string
+        str += this.moves.getMovesInString(); // Append moves history to string
         try
         {
-            fileW.write(str);
-            fileW.flush();
-            fileW.close();
+            fileW.write(str); // Write game data to file
+            fileW.flush(); // Flush the writer
+            fileW.close(); // Close the writer
         }
         catch (java.io.IOException exc)
         {
-            System.out.println("error writing to file: " + exc);
-            JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file")+": " + exc);
-            return;
+            System.out.println("error writing to file: " + exc); // Log error if writing fails
+            JOptionPane.showMessageDialog(this, Settings.lang("error_writing_to_file")+": " + exc); // Show error message
+            return; // Exit method on error
         }
-        JOptionPane.showMessageDialog(this, Settings.lang("game_saved_properly"));
+        JOptionPane.showMessageDialog(this, Settings.lang("game_saved_properly")); // Notify user that game was saved successfully
     }
 
     /** Loading game method(loading game state from the earlier saved file)
@@ -141,46 +140,46 @@ public class Game extends JPanel implements MouseListener, ComponentListener
     }*/
     static public void loadGame(File file)
     {
-        FileReader fileR = null;
+        FileReader fileR = null; // Initialize FileReader
         try
         {
-            fileR = new FileReader(file);
+            fileR = new FileReader(file); // Create FileReader for the specified file
         }
         catch (java.io.IOException exc)
         {
-            System.out.println("Something wrong reading file: " + exc);
-            return;
+            System.out.println("Something wrong reading file: " + exc); // Log error if reading fails
+            return; // Exit method on error
         }
-        BufferedReader br = new BufferedReader(fileR);
-        String tempStr = new String();
-        String blackName, whiteName;
+        BufferedReader br = new BufferedReader(fileR); // Create BufferedReader for reading file
+        String tempStr = new String(); // Initialize temporary string for
+        String blackName, whiteName; // Initialize player names
         try
         {
-            tempStr = getLineWithVar(br, new String("[White"));
+            tempStr = getLineWithVar(br, new String("[White")); // Get white player's name
             whiteName = getValue(tempStr);
-            tempStr = getLineWithVar(br, new String("[Black"));
+            tempStr = getLineWithVar(br, new String("[Black")); // Get black player's name
             blackName = getValue(tempStr);
-            tempStr = getLineWithVar(br, new String("1."));
+            tempStr = getLineWithVar(br, new String("1.")); // Get game type
         }
         catch (ReadGameError err)
         {
-            System.out.println("Error reading file: " + err);
-            return;
+            System.out.println("Error reading file: " + err); // Log error if reading fails
+            return; // Exit method on error
         }
-        Game newGUI = JChessApp.jcv.addNewTab(whiteName + " vs. " + blackName);
-        Settings locSetts = newGUI.settings;
-        locSetts.playerBlack.name = blackName;
-        locSetts.playerWhite.name = whiteName;
-        locSetts.playerBlack.setType(Player.playerTypes.localUser);
-        locSetts.playerWhite.setType(Player.playerTypes.localUser);
-        locSetts.gameMode = Settings.gameModes.loadGame;
-        locSetts.gameType = Settings.gameTypes.local;
+        Game newGUI = JChessApp.jcv.addNewTab(whiteName + " vs. " + blackName); // Create new game tab
+        Settings locSetts = newGUI.settings; // Get settings for the new game
+        locSetts.playerBlack.name = blackName; // Set black player's name
+        locSetts.playerWhite.name = whiteName; // Set white player's name
+        locSetts.playerBlack.setType(Player.playerTypes.localUser); // Set black player type
+        locSetts.playerWhite.setType(Player.playerTypes.localUser); // Set white player type
+        locSetts.gameMode = Settings.gameModes.loadGame; // Set game mode
+        locSetts.gameType = Settings.gameTypes.local; // Set game type
 
-        newGUI.newGame();
-        newGUI.blockedChessboard = true;
-        newGUI.moves.setMoves(tempStr);
-        newGUI.blockedChessboard = false;
-        newGUI.chessboard.repaint();
+        newGUI.newGame(); // Start new game
+        newGUI.blockedChessboard = true; // Block chessboard for user interaction
+        newGUI.moves.setMoves(tempStr); // Set moves history
+        newGUI.blockedChessboard = false; // Unblock chessboard
+        newGUI.chessboard.repaint(); // Repaint chessboard
         //newGUI.chessboard.draw();
     }
 

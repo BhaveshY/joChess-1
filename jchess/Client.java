@@ -29,7 +29,7 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import jchess.server.Connection_info;
+import jchess.server.jchess.server.jchess.server.jchess.server.Connection_info;
 
 /**
  * Class responsible for clients references:
@@ -84,12 +84,12 @@ public class Client implements Runnable
                 output.flush();
 
                 int servCode = input.readInt(); //server returning code
-                print("connection info: " + Connection_info.get(servCode).name());
-                if (Connection_info.get(servCode).name().startsWith("err_"))
+                print("connection info: " + jchess.server.jchess.server.jchess.server.Connection_info.get(servCode).name());
+                if (jchess.server.jchess.server.jchess.server.Connection_info.get(servCode).name().startsWith("err_"))
                 {
-                    throw new Error(Connection_info.get(servCode).name());
+                    throw new Error(jchess.server.jchess.server.jchess.server.Connection_info.get(servCode).name());
                 }
-                if (servCode == Connection_info.all_is_ok.getValue())
+                if (servCode == jchess.server.jchess.server.jchess.server.Connection_info.all_is_ok.getValue())
                 {
                     return true;
                 }

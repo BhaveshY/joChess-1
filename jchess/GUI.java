@@ -37,9 +37,15 @@ import java.io.FileOutputStream;
  */
 public class GUI
 {
+    // The main game instance associated with this GUI
     public Game game;
+    
+    // Static configuration file loaded at startup
     static final public Properties configFile = GUI.getConfigFile();
 
+    /**
+     * Constructor - initializes a new game instance
+     */
     public GUI()
     {
         this.game = new Game();
@@ -53,6 +59,7 @@ public class GUI
      */
     static Image loadImage(String name)
     {
+        // Return null if config file wasn't loaded successfully
         if (configFile == null)
         {
             return null;
@@ -62,6 +69,7 @@ public class GUI
         Toolkit tk = Toolkit.getDefaultToolkit();
         try
         {
+            // Construct path to image based on theme from config
             String imageLink = "theme/" + configFile.getProperty("THEME", "default") + "/images/" + name;
             System.out.println(configFile.getProperty("THEME"));
             url = JChessApp.class.getResource(imageLink);
@@ -79,11 +87,19 @@ public class GUI
         return img;
     }
 
+    /**
+     * Validates if a theme name is valid
+     * TODO: Implement actual theme validation logic
+     */
     static boolean themeIsValid(String name)
     {
         return true;
     }
 
+    /**
+     * Gets the path to the JAR file containing this application
+     * Handles spaces in path and removes trailing separators
+     */
     static String getJarPath()
     {
         String path = GUI.class.getProtectionDomain().getCodeSource().getLocation().getFile();
@@ -97,6 +113,12 @@ public class GUI
         return path;
     }
 
+    /**
+     * Loads or creates the configuration file
+     * First tries to load default config from resources,
+     * then creates config file if it doesn't exist,
+     * finally loads the user's config file
+     */
     static Properties getConfigFile()
     {
         Properties defConfFile = new Properties();
@@ -104,6 +126,7 @@ public class GUI
         File outFile = new File(GUI.getJarPath() + File.separator + "config.txt");
         try
         {
+            // Load default config from resources
             defConfFile.load(GUI.class.getResourceAsStream("config.txt"));
         }
         catch (IOException exc)
@@ -115,6 +138,7 @@ public class GUI
         {
             try
             {
+                // Create new config file from defaults if it doesn't exist
                 defConfFile.store(new FileOutputStream(outFile), null);
             }
             catch (IOException exc)
@@ -125,6 +149,7 @@ public class GUI
         }
         try
         {   
+            // Load the user's config file
             confFile.load(new FileInputStream(outFile));
         }
         catch (IOException exc)

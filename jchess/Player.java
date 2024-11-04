@@ -80,4 +80,14 @@ public class Player implements Serializable
     {
         this.playerType = type;
     }
+
+    public Object getKing() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getKing'");
+    }
+
+    public Object getColor() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getColor'");
+    }
 }

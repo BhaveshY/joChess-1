@@ -51,13 +51,13 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
         super(parent);
 
         // Updated themePath to include package name if necessary
-        String themePath = "/jchess/theme"; // [Changed] Updated resource path
+        String themePath = "/jchess/theme"; // [Changed] Updated resource path to include package name
         java.net.URL themeURL = getClass().getResource(themePath);
         if (themeURL == null) {
             throw new Exception(Settings.lang("error_when_creating_theme_config_window") + ": Theme directory not found in resources at path " + themePath);
         }
 
-        System.out.println("Theme URL: " + themeURL);
+        System.out.println("Theme URL: " + themeURL); // [Added] Log the theme URL for debugging
 
         String[] themeNames = null;
         if (themeURL.getProtocol().equals("file")) {
@@ -84,7 +84,7 @@ import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
             throw new Exception(Settings.lang("error_when_creating_theme_config_window") + ": Unsupported resource protocol " + themeURL.getProtocol());
         }
 
-        System.out.println("Found themes: " + String.join(", ", themeNames));
+        System.out.println("Found themes: " + String.join(", ", themeNames)); // [Added] Log the found themes for debugging
 
         this.setTitle(Settings.lang("choose_theme_window_title"));
         Dimension winDim = new Dimension(550, 230);

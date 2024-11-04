@@ -656,4 +656,9 @@ public class King extends Piece
 
         return ret;
     }
+
+    public Object getColor() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getColor'");
+    }
 }

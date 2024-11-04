@@ -720,7 +720,7 @@ public class Chessboard extends JPanel
         if (this.settings.renderLabels)
         {
             if(topLeftPoint.x <= 0 && topLeftPoint.y <= 0) //if renderLabels and (0,0), than draw it! (for first run)
-            {
+            { 
                 this.drawLabels();
             }
             g2d.drawImage(this.upDownLabel, 0, 0, null);
